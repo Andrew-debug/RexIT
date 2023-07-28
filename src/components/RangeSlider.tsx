@@ -73,16 +73,12 @@ const RangeSlider = ({ name, icon, color }: RangeSliderProps) => {
       <Box>
         <PrettoSlider
           name={name}
-          // value={name === "fourthCrop" ? 100 - (a + b + c) : value}
           value={value}
           onChange={handleSliderChange}
           sx={{ color: color }}
         />
       </Box>
-      <SliderValue>
-        {/* {name === "fourthCrop" ? 100 - (a + b + c) : value}% */}
-        {value}%
-      </SliderValue>
+      <SliderValue>{value}%</SliderValue>
     </RangeSliderWrap>
   );
 };
