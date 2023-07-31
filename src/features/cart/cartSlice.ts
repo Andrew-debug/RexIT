@@ -3,7 +3,7 @@ import { ICracker } from "../../types";
 import { RootState } from "../../store/store";
 
 interface CartState {
-  cartItems: { payload: ICracker }[];
+  cartItems: ICracker[];
   total: number;
 }
 
@@ -17,18 +17,16 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ICracker>) => {
-      state.cartItems = [...state.cartItems, action];
+      state.cartItems = [...state.cartItems, action.payload];
     },
     deleteItem: (state, action: PayloadAction<string>) => {
       const itemId = action.payload;
-      state.cartItems = state.cartItems.filter(
-        (item) => item.payload.id !== itemId
-      );
+      state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
     },
     calcTotals: (state) => {
       let total = 0;
       state.cartItems.forEach((item) => {
-        total += item.payload.price;
+        total += item.price;
       });
       state.total = total;
     },

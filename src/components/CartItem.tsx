@@ -16,11 +16,9 @@ import {
 } from "../styles/CartItemStyles";
 
 const CartItem = ({
-  item: {
-    payload: { id, price, firstCrop, secondCrop, thirdCrop, fourthCrop },
-  },
+  item: { id, price, firstCrop, secondCrop, thirdCrop, fourthCrop },
 }: {
-  item: { payload: ICracker };
+  item: ICracker;
 }) => {
   const dispatch = useDispatch();
 
