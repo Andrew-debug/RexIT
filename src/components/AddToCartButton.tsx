@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
 import { AddToCartBtn } from "../styles/AddToCartButtonStyles";
 import { v4 as uuidv4 } from "uuid";
-import { ICracker } from "../types";
 import Plus from "../assets/icons/plus.svg";
+import { CrackerState } from "../features/crackerCalc/crackerCalcSlice";
 
-const AddToCartButton = ({ cracker }: { cracker: ICracker }) => {
+const AddToCartButton = ({ cracker }: { cracker: CrackerState }) => {
   const [isBtnHovered, setIsBtnHovered] = useState(false);
   const dispatch = useDispatch();
   return (
