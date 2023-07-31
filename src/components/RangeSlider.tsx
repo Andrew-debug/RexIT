@@ -7,8 +7,11 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import {
   CrackerState,
+  selectCracker,
+  selectCrackerItem,
   setCrop,
 } from "../features/crackerCalc/crackerCalcSlice";
+import { RootState } from "../store/store";
 
 const PrettoSlider = styled(Slider)({
   height: 4,
@@ -23,15 +26,9 @@ const PrettoSlider = styled(Slider)({
 
 const RangeSlider = ({ name, icon, color }: RangeSliderProps) => {
   const dispatch = useDispatch();
-  const currentCracker = useSelector(
-    (state: { crackerCalc: CrackerState }) => state.crackerCalc
-  );
-  const value = useSelector(
-    (state: {
-      crackerCalc: {
-        [key: string]: number;
-      };
-    }) => state.crackerCalc[name]
+  const currentCracker = useSelector(selectCracker);
+  const value = useSelector((state: RootState) =>
+    selectCrackerItem(state, name as keyof CrackerState)
   );
 
   const [a, b, c] = [
@@ -43,7 +40,6 @@ const RangeSlider = ({ name, icon, color }: RangeSliderProps) => {
   const handleSliderChange = (_: Event, newValue: number | number[]) => {
     if (typeof newValue !== "number") return;
     const nextSum =
-      // bruh im sorry you have to read this, but rly fun tho
       a + b + c - currentCracker[name as keyof CrackerState] + newValue;
     if (name !== "fourthCrop") {
       if (nextSum >= 0 && nextSum <= 100) {
@@ -73,16 +69,12 @@ const RangeSlider = ({ name, icon, color }: RangeSliderProps) => {
       <Box>
         <PrettoSlider
           name={name}
-          // value={name === "fourthCrop" ? 100 - (a + b + c) : value}
           value={value}
           onChange={handleSliderChange}
           sx={{ color: color }}
         />
       </Box>
-      <SliderValue>
-        {/* {name === "fourthCrop" ? 100 - (a + b + c) : value}% */}
-        {value}%
-      </SliderValue>
+      <SliderValue>{value}%</SliderValue>
     </RangeSliderWrap>
   );
 };

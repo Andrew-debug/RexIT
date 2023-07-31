@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { ICracker } from "../types";
 import { Container } from "../styles";
 import {
   ConstructorHeader,
@@ -13,11 +12,10 @@ import fourthSlider from "../assets/icons/fourth-slider.svg";
 import RangeSlider from "./RangeSlider";
 import DropdownSection from "./DropdownSection";
 import AddToCartButton from "./AddToCartButton";
+import { selectCracker } from "../features/crackerCalc/crackerCalcSlice";
 
 const CrackerConstructor = () => {
-  const cracker = useSelector(
-    (store: { crackerCalc: ICracker }) => store.crackerCalc
-  );
+  const cracker = useSelector(selectCracker);
 
   return (
     <Container>

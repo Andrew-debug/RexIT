@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ImageWrap, ImgContain } from "../styles";
-import { calcTotals } from "../features/cart/cartSlice";
+import { calcTotals, selectCartItems } from "../features/cart/cartSlice";
 import SeedIcon from "../assets/icons/seed.svg";
 import WhiteArrowIcon from "../assets/icons/white-arrow.svg";
 import Badge from "@mui/material/Badge";
@@ -24,9 +24,7 @@ const ShoppingCart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
-  const { cartItems, total } = useSelector(
-    (store: { cart: { cartItems: []; total: number } }) => store.cart
-  );
+  const { cartItems, total } = useSelector(selectCartItems);
 
   useEffect(() => {
     dispatch(calcTotals());

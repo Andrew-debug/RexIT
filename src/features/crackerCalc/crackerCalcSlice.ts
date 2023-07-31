@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store/store";
 
 export interface CrackerState {
   firstCrop: number;
@@ -7,7 +8,7 @@ export interface CrackerState {
   fourthCrop: number;
 }
 
-const initialState = {
+const initialState: CrackerState = {
   firstCrop: 0,
   secondCrop: 0,
   thirdCrop: 0,
@@ -32,4 +33,9 @@ const crackerSlice = createSlice({
 });
 
 export const { setCrop } = crackerSlice.actions;
+
+export const selectCracker = (state: RootState) => state.crackerCalc;
+export const selectCrackerItem = (state: RootState, key: keyof CrackerState) =>
+  state.crackerCalc[key];
+
 export default crackerSlice.reducer;
